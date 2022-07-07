@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!--margin-top: 8px;-->
+<!--margin-left: -27px;-->
+<h1 class="display-4" style="margin-top: 8px; margin-left: -27px;" xmlns="http://www.w3.org/1999/html">Hello, {{user.first_name}} {{user.last_name}}!!</h1>
+<br>
+{% if user.tracker|length == 0 %}
+<div class="alert alert-primary" role="alert">
+No Tracker. Create new tracker by clicking below
+</div>
+{% else %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Sr.No</th>
+      <th scope="col">Tracker</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for tracker in user.tracker %}
+    <tr>
+<!--      <th scope="row">1</th>-->
+      <td>{{loop.index}}</td>
+      <td>{{tracker.name}}</td>
+      <td>{{tracker.description}}</td>
+      <td>{{tracker.date}}</td>
+      <td>{{tracker.time}}</td>
+      <td><a href="{{url_for('views.update_tracker', id = tracker.id)}}" type="button" class="btn btn-outline-primary">Update</button></a>
+      <a href="{{url_for('auth.delete_tracker', id = tracker.id)}}" type="button" class="btn btn-outline-primary">Delete</button></a>
+      </td>
+    </tr>
+  {% endfor%}
+  </tbody>
+</table>
+{% endif %}
+<br>
+<br>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a href="/add-tracker" class="btn btn-primary" type="button">Add Tracker</button></a>
+</div>
+{% endblock %}

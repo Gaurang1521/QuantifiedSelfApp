@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Log{% endblock %}
+{% block content %}
+<!--<h1>{{id}}</h1>-->
+{% for tracker in user.tracker %}
+{% if tracker.id == id %}
+<h1 class="display-4" style="margin-top: 8px; margin-left: -27px;" xmlns="http://www.w3.org/1999/html">{{tracker.name}} Log </h1>
+<br>
+{% endif %}
+{% endfor %}
+
+{% for tracker in user.tracker %}
+{% if tracker.id == id %}
+{% if tracker.log|length == 0 %}
+<div class="alert alert-primary" role="alert">
+No Log found. Add log by clicking below
+</div>
+{% else %}
+{% for tracker in user.tracker %}
+{% if tracker.id == id %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Sr.No</th>
+      <th scope="col">Value</th>
+      <th scope="col">Notes</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+<tbody>
+{% for log in tracker.log %}
+<tr>
+      <td>{{loop.index}}</td>
+      <td>{{log.value}}</td>
+      <td>{{log.notes}}</td>
+      <td>{{log.date}}</td>
+      <td>{{log.time}}</td>
+      <td><a href="{{url_for('views.update_log',id = log.id)}}" type="button" class="btn btn-outline-primary">Update</button></a>
+      <a href="{{url_for('views.log_delete',id = log.id , tracker_id = id)}}" type="button" class="btn btn-outline-primary">Delete</button></a>
+      </td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+<div class="d-grid gap-2 col-6 mx-auto">
+ <a href="{{url_for('views.add_log',id = id)}}" class="btn btn-primary" type="button">Add Log</button></a>
+</div>
+{% endblock %}

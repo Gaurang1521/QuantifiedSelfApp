@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Add-Tracker{% endblock %}
+{% block content %}
+
+<h1 class="display-4" style="margin-top: 8px; margin-left: -27px;">Add Tracker</h1>
+<form method="POST">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text"
+           class="form-control"
+           id="name"
+           name = "name"
+           placeholder="Enter tracker name">
+  </div>
+  <div class="form-group">
+    <label for="type">Tracker Type</label>
+    <select class="form-control"
+            id="type"
+            name="type">
+      <option>Boolean</option>
+      <option>Numerical</option>
+      <option>Text</option>
+      <option>Multiple Choice</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control"
+              id="description"
+              name="description"
+              maxlength="200"
+              rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="settings">Settings<small> (Only for Multiple choose tracker) </small></label>
+    <input type="text"
+           class="form-control"
+           id="settings"
+           name="settings"
+           maxlength="100"
+           placeholder="Enter your setting for Multiple choose tracker type enter value seperated by ,(Comma) Example(A,B,C,D)">
+  </div>
+   <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

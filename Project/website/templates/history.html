@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+{% block content %}
+<!--margin-top: 8px;-->
+<!--margin-left: -27px;-->
+<h1 class="display-4" style="margin-top: 8px; margin-left: -27px;" xmlns="http://www.w3.org/1999/html">History</h1>
+<br>
+{% if user.history|length == 0 %}
+<div class="alert alert-primary" role="alert">
+No history found.
+</div>
+{% else %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Sr.No</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for history in user.history %}
+    <tr>
+<!--      <th scope="row">1</th>-->
+      <td>{{loop.index}}</td>
+      <td>{{history.date}}</td>
+      <td>{{history.time}}</td>
+      <td>{{history.new}}</td>
+    </tr>
+  {% endfor%}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

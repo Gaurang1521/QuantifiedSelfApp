@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Add-Log{% endblock %}
+{% block content %}
+<h1 class="display-4" style="margin-top: 8px; margin-left: -27px;">Add Log</h1>
+<br>
+<form method="POST">
+{% for tracker in user.tracker %}
+{% if tracker.id == id %}
+<!--<div class="mb-3">-->
+<!--  <label for="notes" class="form-label">Notes</label>-->
+<!--  <textarea class="form-control" id="notes" name="notes" placeholder="Enter Notes" maxlength="150" rows="3"></textarea>-->
+<!--</div>-->
+{% if tracker.tracker_type == "Boolean" %}
+  <div class="form-group">
+    <label for="Boolean">Select Boolean value:</label>
+    <select class="form-control"
+            id="Boolean"
+            name="Boolean">
+      <option>True</option>
+      <option>False</option>
+    </select>
+  </div>
+<!--  Select Boolean value:-->
+<!--<div class="form-check">-->
+<!--  <input class="form-check-input" type="radio" name="Boolean" id="Boolean1">-->
+<!--  <label class="form-check-label" for="Boolean1">-->
+<!--    True-->
+<!--  </label>-->
+<!--</div>-->
+<!--<div class="form-check">-->
+<!--  <input class="form-check-input" type="radio" name="Boolean" id="Boolean2" checked>-->
+<!--  <label class="form-check-label" for="Boolean2">-->
+<!--    False-->
+<!--  </label>-->
+<!--</div>-->
+<!--<br>-->
+{% elif tracker.tracker_type == "Numerical" %}
+<div class="form-group">
+    <label for="Numerical">Enter Value</label>
+    <input type="number" class="form-control" id="Numerical" name="Numerical" placeholder="Enter Numerical value.">
+</div>
+{% elif tracker.tracker_type == "Text" %}
+<div class="mb-3">
+  <label for="Text" class="form-label">Text Value</label>
+  <input type="text" class="form-control" id="Text" name="Text" placeholder="Enter text Value">
+</div>
+{% elif tracker.tracker_type == "Multiple Choice" %}
+ <div class="form-group">
+    <label for="Multiple">Choose one option</label>
+    <select class="form-control"
+            id="Multiple"
+            name="Multiple">
+      {% for y in option %}
+      <option>{{y}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  {% endif %}
+<div class="mb-3">
+  <label for="notes" class="form-label">Notes</label>
+  <textarea class="form-control" id="notes" name="notes" placeholder="Enter Notes" maxlength="150" rows="3"></textarea>
+</div>
+{% endif %}
+{% endfor %}
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
